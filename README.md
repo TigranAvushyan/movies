@@ -9,7 +9,7 @@ npm install
 ```
 npm run date
 
-npm run serve
+npm run start
 ```
 
 ### Compiles and minifies for production
