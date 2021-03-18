@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container">
+    <Loading v-if="loading" />
+    <Movies v-else />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {mapActions} from "vuex";
+import Movies from "./components/Movies";
+import Loading from "./components/Loading";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Loading,
+    Movies
+  },
+  data() {
+    return {
+      loading: true
+    }
+  },
+  methods: {
+    ...mapActions(['FETCH_ALL_MOVIES'])
+  },
+  mounted() {
+    this.FETCH_ALL_MOVIES().then(() => this.loading = false)
   }
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
